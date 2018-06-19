@@ -30,13 +30,15 @@ export default class Tab extends React.Component {
   }
 
   render() {
-    let { title, badge } = this.props;
+    let { renderTitle, title, badge } = this.props;
     let icon = null;
     if (React.Children.count(this.props.children) > 0) {
       icon = React.Children.only(this.props.children);
     }
 
-    if (title) {
+    if (renderTitle) {
+      title = renderTitle([styles.title, this.props.titleStyle]);
+    } else if (title) {
       title =
         <Text
           numberOfLines={1}
