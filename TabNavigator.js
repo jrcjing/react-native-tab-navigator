@@ -7,6 +7,7 @@ import React, {
 import {
   StyleSheet,
   View,
+  Image,
 } from 'react-native';
 
 import Badge from './Badge';
@@ -63,7 +64,7 @@ export default class TabNavigator extends React.Component {
   }
 
   render() {
-    let { style, children, tabBarStyle, tabBarShadowStyle, sceneStyle, ...props } = this.props;
+    let { style, children, tabBarStyle, tabBarShadowStyle, sceneStyle, backgroundImageUrl, backgroundImageStyle, ...props } = this.props;
     let scenes = [];
 
     React.Children.forEach(children, (item, index) => {
@@ -88,6 +89,7 @@ export default class TabNavigator extends React.Component {
       <View {...props} style={[styles.container, style]}>
         {scenes}
         <TabBar style={tabBarStyle} shadowStyle={tabBarShadowStyle}>
+          { backgroundImageUrl ? <Image source={{ uri: backgroundImageUrl }} resizeMode={'stretch'} style={[{ position: 'absolute', left: 0, right: 0, top: 0, height: 49 }, backgroundImageStyle]} /> : null }
           {React.Children.map(children, this._renderTab)}
         </TabBar>
       </View>
